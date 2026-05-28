@@ -1,0 +1,34 @@
+{
+  "package": "com.banxing.app",
+  "name": "伴行无界",
+  "versionCode": 1,
+  "versionName": "1.0.0",
+  "minPlatformVersion": 1080,
+  "icon": "assets/images/logo.png",
+  "config": {
+    "logLevel": "off"
+  },
+  "features": [
+    { "name": "system.network" },
+    { "name": "system.battery" },
+    { "name": "system.database" },
+    { "name": "system.fetch" }
+  ],
+  "permissions": [
+    { "origin": "*" }
+  ],
+  "router": {
+    "entry": "pages/Chat",
+    "pages": {
+      "pages/Home":       { "component": "index" },
+      "pages/Chat":       { "component": "index" },
+      "pages/Navigation": { "component": "index" },
+      "pages/Profile":    { "component": "index" }
+    }
+  },
+  "display": {
+    "titleBarBackgroundColor": "#FF8C69",
+    "titleBarTextColor": "#FFFFFF",
+    "titleBarText": "伴行无界"
+  }
+}

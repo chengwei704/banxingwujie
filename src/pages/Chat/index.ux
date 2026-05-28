@@ -1,0 +1,157 @@
+<template>
+  <div class="chat-page">
+    <list class="msg-list">
+      <list-item for="{{(i, msg) in messages}}" key="{{i}}" class="list-item">
+        <div class="msg-row {{msg.role}}">
+          <text class="bubble">{{msg.text}}</text>
+        </div>
+      </list-item>
+    </list>
+
+    <div class="input-bar">
+      <input
+        class="input"
+        value="{{inputText}}"
+        placeholder="和团团说说话…"
+        onchange="onInput"
+      />
+      <div class="send-btn" onclick="onSend">
+        <text class="send-text">发送</text>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      messages: [
+        { role: 'ai', text: '你好呀！我是团团，今天旅途怎么样？😊' }
+      ],
+      inputText: '',
+      sending: false,
+    }
+  },
+
+  onInput(e) {
+    this.inputText = e.value
+  },
+
+  async onSend() {
+    const text = this.inputText.trim()
+    if (!text || this.sending) return
+
+    this.messages = [...this.messages, { role: 'user', text }]
+    this.inputText = ''
+    this.sending = true
+
+    try {
+      const res = await this.callAI(text)
+      this.messages = [...this.messages, { role: 'ai', text: res }]
+    } catch (e) {
+      this.messages = [
+        ...this.messages,
+        { role: 'ai', text: '团团出了点状况，稍后再试吧…' }
+      ]
+    } finally {
+      this.sending = false
+    }
+  },
+
+  async callAI(userMsg) {
+    const replies = [
+      '听起来很有趣！告诉我更多吧～',
+      '旅途中有我陪着你，不用担心😊',
+      '嗯嗯，我在听呢～',
+      '这段旅程一定很特别！',
+    ]
+    await new Promise(r => setTimeout(r, 800))
+    return replies[Math.floor(Math.random() * replies.length)]
+  },
+}
+</script>
+
+<style>
+.chat-page {
+  flex-direction: column;
+  height: 100%;
+  background-color: #FAFAF8;
+}
+
+.msg-list {
+  flex: 1;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.list-item {
+  margin-bottom: 12px;
+}
+
+.msg-row {
+  flex-direction: row;
+}
+
+.msg-row.user {
+  justify-content: flex-end;
+}
+
+.msg-row.ai {
+  justify-content: flex-start;
+}
+
+.bubble {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 14px;
+  padding-right: 14px;
+  font-size: 14px;
+  color: #333333;
+}
+
+.msg-row.user .bubble {
+  background-color: #FF8C69;
+  color: #FFFFFF;
+}
+
+.input-bar {
+  flex-direction: row;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-top-width: 1px;
+  border-top-color: #EEEEEE;
+  background-color: #FFFFFF;
+}
+
+.input {
+  flex: 1;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #F5F5F5;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 14px;
+}
+
+.send-btn {
+  width: 60px;
+  height: 40px;
+  background-color: #FF8C69;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.send-text {
+  color: #FFFFFF;
+  font-size: 14px;
+}
+</style>

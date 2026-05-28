@@ -1,0 +1,15 @@
+{
+  "name": "banxing",
+  "version": "1.0.0",
+  "description": "伴行无界快应用",
+  "scripts": {
+    "build": "hap build",
+    "server": "hap server"
+  },
+  "devDependencies": {
+    "hap-toolkit": "^6.0.0"
+  },
+  "browserslist": [
+    "chrome 65"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "package": "com.banxing.app",
+  "name": "伴行无界",
+  "versionCode": 1,
+  "versionName": "1.0.0",
+  "minPlatformVersion": 1080,
+  "icon": "assets/images/logo.png",
+  "config": {
+    "logLevel": "off",
+    "debug": true
+  },
+  "features": [
+    {
+      "name": "system.network"
+    },
+    {
+      "name": "system.battery"
+    },
+    {
+      "name": "system.database"
+    },
+    {
+      "name": "system.fetch"
+    }
+  ],
+  "permissions": [
+    {
+      "origin": "*"
+    }
+  ],
+  "router": {
+    "entry": "pages/Chat",
+    "pages": {
+      "pages/Home": {
+        "component": "index"
+      },
+      "pages/Chat": {
+        "component": "index"
+      },
+      "pages/Navigation": {
+        "component": "index"
+      },
+      "pages/Profile": {
+        "component": "index"
+      }
+    }
+  },
+  "display": {
+    "titleBarBackgroundColor": "#FF8C69",
+    "titleBarTextColor": "#FFFFFF",
+    "titleBarText": "伴行无界"
+  },
+  "packageInfo": {
+    "originType": "quickapp-ide",
+    "toolkit": "2.0.9",
+    "timeStamp": "2026-05-28T07:26:42.101Z",
+    "node": "v22.17.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

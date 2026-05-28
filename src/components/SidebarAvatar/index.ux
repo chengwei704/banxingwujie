@@ -1,0 +1,47 @@
+<template>
+  <div class="sidebar-container" :class="{ collapsed: isCollapsed }">
+    <!-- 收拢态只显示头像 -->
+    <div class="avatar" @click="toggle">
+      <image src="/assets/avatar.png" />
+    </div>
+    <!-- 展开后显示对话气泡、快捷操作 -->
+    <div class="expanded" show="{{ !isCollapsed }}">
+      <emotion-bubble mood="{{ currentMood }}"></emotion-bubble>
+      <div class="quick-actions">
+        <div @click="goChat">💬 陪我说说话</div>
+        <div @click="goTrip">🚄 我的行程</div>
+        <div @click="goNavigate">🧭 附近查询</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['collapsed'],
+  data() {
+    return {
+      isCollapsed: this.collapsed
+    }
+  },
+  computed: {
+    currentMood() {
+      // 从全局状态取最近一条心情
+      return this.$app.globalState.userMoodHistory.slice(-1)[0] || '期待旅行'
+    }
+  },
+  toggle() {
+    this.isCollapsed = !this.isCollapsed
+    this.$emit('update:collapsed', this.isCollapsed)
+  },
+  goChat() { /* 跳转聊天页 */ },
+  goTrip() { /* 跳转行程页 */ },
+  goNavigate() { /* 跳转导航页 */ }
+}
+</script>
+
+<style>
+.sidebar-container { position: fixed; right: 0; top: 30%; z-index: 999; }
+.collapsed .avatar { width: 60px; height: 60px; }
+.expanded { width: 200px; background: rgba(255,255,255,0.95); }
+</style>
