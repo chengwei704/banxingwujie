@@ -1,157 +1,416 @@
-<template>
-  <div class="chat-page">
-    <list class="msg-list">
-      <list-item for="{{(i, msg) in messages}}" key="{{i}}" class="list-item">
-        <div class="msg-row {{msg.role}}">
-          <text class="bubble">{{msg.text}}</text>
-        </div>
-      </list-item>
-    </list>
+<import name="trip-card" src="/components/TripCard.ux"></import>
+<import name="env-card"  src="/components/EnvCard.ux"></import>
 
-    <div class="input-bar">
-      <input
-        class="input"
-        value="{{inputText}}"
-        placeholder="和团团说说话…"
-        onchange="onInput"
-      />
-      <div class="send-btn" onclick="onSend">
-        <text class="send-text">发送</text>
+<template>
+  <div class="page">
+
+    <!-- 导航栏 -->
+    <div class="nav">
+      <div class="brand">
+        <text class="brand-star">✦</text>
+        <text class="brand-name">团团</text>
+        <div class="brand-tag">
+          <text class="brand-tag-text">陪你每一程</text>
+        </div>
+      </div>
+      <div class="nav-icons">
+        <text class="nav-icon-clock">○</text>
+        <text class="nav-icon-menu">⋮</text>
       </div>
     </div>
+
+    <!-- 滚动内容区 -->
+    <scroll class="scroll-area" scroll-direction="vertical">
+      <div class="scroll-inner">
+
+        <!-- 第一条气泡 -->
+        <div class="msg-row">
+          <div class="avatar">
+            <image class="avatar-img" src="/assets/images/avatar.png"></image>
+          </div>
+          <div class="bubble-wrap">
+            <div class="bubble">
+              <text class="bubble-text">你好！我是你的旅行伙伴 TripPal ✨{{'\n'}}无论网络如何，我都会陪伴你{{'\n'}}让每一段旅程都安心又愉快</text>
+            </div>
+            <text class="bubble-time">10:30</text>
+          </div>
+        </div>
+
+        <!-- 行程卡片（引入） -->
+        <div class="card-wrap">
+          <trip-card></trip-card>
+        </div>
+
+        <!-- 环境卡片（引入） -->
+        <div class="card-wrap">
+          <env-card></env-card>
+        </div>
+
+        <!-- 第二条气泡 -->
+        <div class="msg-row">
+          <div class="avatar">
+            <image class="avatar-img" src="/assets/images/avatar.png"></image>
+          </div>
+          <div class="bubble-wrap">
+            <div class="bubble bubble-offline">
+              <text class="bubble-text">目前处于无网络状态，{{'\n'}}我已切换至离线模式{{'\n'}}我会继续为你提供提醒和陪伴～</text>
+            </div>
+            <text class="bubble-time">10:30</text>
+          </div>
+        </div>
+
+        <!-- 底部留白 -->
+        <div class="bottom-space"></div>
+
+      </div>
+    </scroll>
+
+    <!-- 快捷功能栏 -->
+    <div class="quick-bar">
+      <div class="quick-item">
+        <div class="quick-icon-wrap">
+          <text class="quick-icon-text">🔔</text>
+        </div>
+        <text class="quick-label">到站提醒</text>
+        <text class="quick-sub">已开启</text>
+      </div>
+
+      <div class="quick-item">
+        <div class="quick-icon-wrap">
+          <text class="quick-icon-text">🗺</text>
+        </div>
+        <text class="quick-label">行程进度</text>
+        <text class="quick-sub">查看进度</text>
+      </div>
+
+      <div class="quick-item">
+        <div class="quick-icon-wrap red">
+          <text class="quick-icon-text">💬</text>
+        </div>
+        <text class="quick-label">陪我聊天</text>
+        <text class="quick-sub">打发时间</text>
+      </div>
+
+      <div class="quick-item">
+        <text class="more-dots">···</text>
+        <text class="more-label">更多功能</text>
+      </div>
+    </div>
+
+    <!-- 输入栏 -->
+    <div class="input-bar">
+      <div class="input-field">
+        <text class="input-placeholder">告诉我你的需求吧～</text>
+      </div>
+      <text class="emoji-btn">🙂</text>
+      <div class="send-btn">
+        <text class="send-icon">➤</text>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      messages: [
-        { role: 'ai', text: '你好呀！我是团团，今天旅途怎么样？😊' }
-      ],
-      inputText: '',
-      sending: false,
-    }
-  },
-
-  onInput(e) {
-    this.inputText = e.value
-  },
-
-  async onSend() {
-    const text = this.inputText.trim()
-    if (!text || this.sending) return
-
-    this.messages = [...this.messages, { role: 'user', text }]
-    this.inputText = ''
-    this.sending = true
-
-    try {
-      const res = await this.callAI(text)
-      this.messages = [...this.messages, { role: 'ai', text: res }]
-    } catch (e) {
-      this.messages = [
-        ...this.messages,
-        { role: 'ai', text: '团团出了点状况，稍后再试吧…' }
-      ]
-    } finally {
-      this.sending = false
-    }
-  },
-
-  async callAI(userMsg) {
-    const replies = [
-      '听起来很有趣！告诉我更多吧～',
-      '旅途中有我陪着你，不用担心😊',
-      '嗯嗯，我在听呢～',
-      '这段旅程一定很特别！',
-    ]
-    await new Promise(r => setTimeout(r, 800))
-    return replies[Math.floor(Math.random() * replies.length)]
-  },
+  onInit() {}
 }
 </script>
 
 <style>
-.chat-page {
-  flex-direction: column;
-  height: 100%;
-  background-color: #FAFAF8;
-}
+  .page {
+    flex-direction: column;
+    background-color: #f0f4ff;
+    height: 100%;
+  }
 
-.msg-list {
-  flex: 1;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
-}
+  /* ===== 导航栏 ===== */
+  .nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 14px;
+    padding-left: 18px;
+    padding-right: 18px;
+    /* background-color: #ffffff; */
+  }
 
-.list-item {
-  margin-bottom: 12px;
-}
+  .brand {
+    flex-direction: row;
+    align-items: center;
+  }
 
-.msg-row {
-  flex-direction: row;
-}
+  .brand-star {
+    font-size: 16px;
+    color: #4e7cff;
+    margin-right: 5px;
+    font-weight: 700;
+  }
 
-.msg-row.user {
-  justify-content: flex-end;
-}
+  .brand-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a2a4a;
+    margin-right: 8px;
+  }
 
-.msg-row.ai {
-  justify-content: flex-start;
-}
+  .brand-tag {
+    background-color: #eef2ff;
+    border-radius: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
-.bubble {
-  background-color: #FFFFFF;
-  border-radius: 16px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 14px;
-  padding-right: 14px;
-  font-size: 14px;
-  color: #333333;
-}
+  .brand-tag-text {
+    font-size: 11px;
+    color: #4e7cff;
+    font-weight: 500;
+  }
 
-.msg-row.user .bubble {
-  background-color: #FF8C69;
-  color: #FFFFFF;
-}
+  .nav-icons {
+    flex-direction: row;
+    align-items: center;
+  }
 
-.input-bar {
-  flex-direction: row;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 12px;
-  padding-right: 12px;
-  border-top-width: 1px;
-  border-top-color: #EEEEEE;
-  background-color: #FFFFFF;
-}
+  .nav-icon-clock {
+    font-size: 20px;
+    color: #8fa3c8;
+    margin-right: 16px;
+  }
 
-.input {
-  flex: 1;
-  height: 40px;
-  border-radius: 20px;
-  background-color: #F5F5F5;
-  padding-left: 16px;
-  padding-right: 16px;
-  font-size: 14px;
-}
+  .nav-icon-menu {
+    font-size: 22px;
+    color: #8fa3c8;
+    font-weight: 700;
+  }
 
-.send-btn {
-  width: 60px;
-  height: 40px;
-  background-color: #FF8C69;
-  border-radius: 20px;
-  justify-content: center;
-  align-items: center;
-  margin-left: 8px;
-}
+  /* ===== 滚动区 ===== */
+  .scroll-area {
+    flex: 1;
+  }
 
-.send-text {
-  color: #FFFFFF;
-  font-size: 14px;
-}
+  .scroll-inner {
+    flex-direction: column;
+    padding-top: 16px;
+    padding-right: 14px;
+    padding-bottom: 16px;
+    padding-left: 14px;
+  }
+
+  /* ===== 气泡行 ===== */
+  .msg-row {
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 23px;
+    background-color: #eef2ff;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+
+  .avatar-img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .bubble-wrap {
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .bubble {
+    background-color: #ffffff;
+    /* border-radius: 16px 16px 16px 16px; */
+    padding-top: 14px;
+    padding-right: 16px;
+    padding-bottom: 14px;
+    padding-left: 16px;
+    margin-bottom: 4px;
+  }
+
+  .bubble-offline {
+    background-color: #f5f8ff;
+  }
+
+  .bubble-text {
+    font-size: 14px;
+    color: #2d3a5e;
+    line-height: 24px;
+  }
+
+  .bubble-time {
+    font-size: 11px;
+    color: #8fa3c8;
+    padding-left: 2px;
+  }
+
+  .deco-bird {
+    width: 62px;
+    height: 62px;
+    border-radius: 31px;
+    background-color: #dce9ff;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-left: 10px;
+    align-self: flex-end;
+  }
+
+  .deco-img {
+    width: 62px;
+    height: 62px;
+  }
+
+  /* ===== 卡片包装 ===== */
+  .card-wrap {
+    margin-bottom: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .bottom-space {
+    height: 8px;
+  }
+
+  /* ===== 快捷栏 ===== */
+  .quick-bar {
+    flex-direction: row;
+    align-items: stretch;
+    padding-top: 0px;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .quick-item {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.28);
+    border-radius: 18px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgba(255, 250, 255, 0.5);
+    margin-right: 8px;
+  }
+
+  .quick-icon-wrap {
+    width: 19px;
+    height: 19px;
+    border-radius: 12px;
+    background-color: #eef2ff;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+
+  .quick-icon-wrap.red {
+    background-color: #fff0f0;
+  }
+
+  .quick-icon-text {
+    font-size: 19px;
+  }
+
+  .quick-label {
+    font-size: 11px;
+    color: #2d3a5e;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .quick-sub {
+    font-size: 10px;
+    color: #8fa3c8;
+    text-align: center;
+  }
+
+  .quick-more {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.28);
+    border-radius: 18px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(100, 150, 255, 0.22);
+    width: 50px;
+  }
+
+  .more-dots {
+    font-size: 18px;
+    color: #8fa3c8;
+    margin-bottom: 6px;
+  }
+
+  .more-label {
+    font-size: 10px;
+    color: #8fa3c8;
+    text-align: center;
+  }
+
+  /* ===== 输入栏 ===== */
+  .input-bar {
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0px;
+    padding-bottom: 24px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .input-field {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.28);
+    border-radius: 24px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 18px;
+    padding-right: 16px;
+    margin-right: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(100, 150, 255, 0.22);
+  }
+
+  .input-placeholder {
+    font-size: 14px;
+    color: #b0bcd4;
+  }
+
+  .emoji-btn {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+
+  .send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #4e7cff;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .send-icon {
+    font-size: 16px;
+    color: #ffffff;
+  }
 </style>
