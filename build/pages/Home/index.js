@@ -4,10 +4,10 @@
       return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/script-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/packager/lib/loaders/module-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/babel-loader/lib/index.js?cwd=c:\\Users\\chengyuanyuan.com\\伴行无界&cacheDirectory&plugins[]=c:\\Users\\chengyuanyuan.com\\.quickapp-studio\\extensions\\hapteam.hap-toolbar-1.3.9\\node_modules\\@hap-toolkit\\dsl-xvm\\lib\\loaders\\babel-plugin-jsx.js&comments=false&configFile=c:\\Users\\chengyuanyuan.com\\.quickapp-studio\\extensions\\hapteam.hap-toolbar-1.3.9\\node_modules\\@hap-toolkit\\packager\\babel.config.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/access-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=script!./src/pages/Home/index.ux?uxType=page":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/script-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/packager/lib/loaders/module-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/babel-loader/lib/index.js?cwd=c:\Users\chengyuanyuan.com\伴行无界&cacheDirectory&plugins[]=c:\Users\chengyuanyuan.com\.quickapp-studio\extensions\hapteam.hap-toolbar-1.3.9\node_modules\@hap-toolkit\dsl-xvm\lib\loaders\babel-plugin-jsx.js&comments=false&configFile=c:\Users\chengyuanyuan.com\.quickapp-studio\extensions\hapteam.hap-toolbar-1.3.9\node_modules\@hap-toolkit\packager\babel.config.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/access-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=script!./src/pages/Home/index.ux?uxType=page ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/script-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/packager/lib/loaders/module-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/babel-loader/lib/index.js?cwd=C:\\Users\\chengyuanyuan.com\\伴行无界&cacheDirectory&plugins[]=C:\\Users\\chengyuanyuan.com\\AppData\\Roaming\\npm\\node_modules\\hap-toolkit\\node_modules\\@hap-toolkit\\dsl-xvm\\lib\\loaders\\babel-plugin-jsx.js&comments=false&configFile=C:\\Users\\chengyuanyuan.com\\AppData\\Roaming\\npm\\node_modules\\hap-toolkit\\node_modules\\@hap-toolkit\\packager\\babel.config.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/access-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=script!./src/pages/Home/index.ux?uxType=page":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/script-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/packager/lib/loaders/module-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/babel-loader/lib/index.js?cwd=C:\Users\chengyuanyuan.com\伴行无界&cacheDirectory&plugins[]=C:\Users\chengyuanyuan.com\AppData\Roaming\npm\node_modules\hap-toolkit\node_modules\@hap-toolkit\dsl-xvm\lib\loaders\babel-plugin-jsx.js&comments=false&configFile=C:\Users\chengyuanyuan.com\AppData\Roaming\npm\node_modules\hap-toolkit\node_modules\@hap-toolkit\packager\babel.config.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/access-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=script!./src/pages/Home/index.ux?uxType=page ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module) => {
 
 module.exports = function __scriptModule__ (module, exports, $app_require$){"use strict";
@@ -16,7 +16,81 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _default = exports.default = {};
+var _default = exports.default = {
+  data: {
+    currentLat: 30.297,
+    currentLng: 120.213,
+    mapScale: 12,
+    departure: '杭州东站',
+    destination: '上海虹桥站',
+    remainTime: '32 分钟',
+    progress: 52,
+    markers: [{
+      id: 1,
+      latitude: 30.297,
+      longitude: 120.213,
+      title: '杭州东站',
+      iconPath: '/common/marker_start.png'
+    }, {
+      id: 2,
+      latitude: 31.194,
+      longitude: 121.320,
+      title: '上海虹桥站',
+      iconPath: '/common/marker_end.png'
+    }],
+    polyline: [{
+      points: [{
+        latitude: 30.297,
+        longitude: 120.213
+      }, {
+        latitude: 30.6,
+        longitude: 120.6
+      }, {
+        latitude: 30.9,
+        longitude: 120.9
+      }, {
+        latitude: 31.194,
+        longitude: 121.320
+      }],
+      color: '#4e7cff',
+      width: 4,
+      dottedLine: false
+    }],
+    poiList: [{
+      name: '外滩',
+      dist: '距终点 2.1km',
+      tag: '景点',
+      emoji: '🏛️',
+      color: '#ffe3ec'
+    }, {
+      name: '豫园',
+      dist: '距终点 3.4km',
+      tag: '景点',
+      emoji: '🌿',
+      color: '#e3f8ec'
+    }, {
+      name: '南翔小笼',
+      dist: '距终点 1.8km',
+      tag: '美食',
+      emoji: '🍜',
+      color: '#fff3e0'
+    }, {
+      name: '陆家嘴',
+      dist: '距终点 4.2km',
+      tag: '景点',
+      emoji: '🏙️',
+      color: '#e3edff'
+    }]
+  },
+  onInit() {},
+  onZoomIn() {
+    this.mapScale = Math.min(this.mapScale + 1, 20);
+  },
+  onZoomOut() {
+    this.mapScale = Math.max(this.mapScale - 1, 3);
+  },
+  onLocate() {}
+};
 const moduleOwn = exports.default || module.exports;
 const accessors = ['public', 'protected', 'private'];
 if (moduleOwn.data && accessors.some(function (acc) {
@@ -43,31 +117,625 @@ if (moduleOwn.data && accessors.some(function (acc) {
 
 /***/ }),
 
-/***/ "../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/style-loader.js?index=0&type=style!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=style!./src/pages/Home/index.ux?uxType=page":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/style-loader.js?index=0&type=style!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=style!./src/pages/Home/index.ux?uxType=page ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/style-loader.js?index=0&type=style!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=style!./src/pages/Home/index.ux?uxType=page":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/style-loader.js?index=0&type=style!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=style!./src/pages/Home/index.ux?uxType=page ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = {}
+module.exports = {
+  ".page": {
+    "flexDirection": "column",
+    "backgroundColor": "#f0f4ff",
+    "height": "100%"
+  },
+  ".nav": {
+    "flexDirection": "row",
+    "alignItems": "center",
+    "justifyContent": "space-between",
+    "paddingTop": "14px",
+    "paddingBottom": "14px",
+    "paddingLeft": "18px",
+    "paddingRight": "18px",
+    "backgroundColor": "#ffffff"
+  },
+  ".brand": {
+    "flexDirection": "row",
+    "alignItems": "center"
+  },
+  ".brand-star": {
+    "fontSize": "16px",
+    "color": "#4e7cff",
+    "marginRight": "5px",
+    "fontWeight": "700"
+  },
+  ".brand-name": {
+    "fontSize": "20px",
+    "fontWeight": "800",
+    "color": "#1a2a4a",
+    "marginRight": "8px"
+  },
+  ".brand-tag": {
+    "backgroundColor": "#eef2ff",
+    "borderRadius": "20px",
+    "paddingTop": "3px",
+    "paddingBottom": "3px",
+    "paddingLeft": "10px",
+    "paddingRight": "10px"
+  },
+  ".brand-tag-text": {
+    "fontSize": "11px",
+    "color": "#4e7cff",
+    "fontWeight": "500"
+  },
+  ".nav-icons": {
+    "flexDirection": "row",
+    "alignItems": "center"
+  },
+  ".nav-icon-clock": {
+    "fontSize": "20px",
+    "color": "#8fa3c8",
+    "marginRight": "16px"
+  },
+  ".nav-icon-menu": {
+    "fontSize": "22px",
+    "color": "#8fa3c8",
+    "fontWeight": "700"
+  },
+  ".map-area": {
+    "height": "340px",
+    "position": "relative"
+  },
+  ".map-comp": {
+    "width": "100%",
+    "height": "340px"
+  },
+  ".progress-float": {
+    "position": "absolute",
+    "bottom": "14px",
+    "left": "14px",
+    "right": "60px",
+    "backgroundColor": "rgba(255,255,255,0.92)",
+    "borderRadius": "14px",
+    "paddingTop": "10px",
+    "paddingBottom": "10px",
+    "paddingLeft": "14px",
+    "paddingRight": "14px",
+    "flexDirection": "column"
+  },
+  ".pf-row": {
+    "flexDirection": "row",
+    "justifyContent": "space-between",
+    "alignItems": "center",
+    "marginBottom": "6px"
+  },
+  ".pf-stations": {
+    "flexDirection": "row",
+    "alignItems": "center"
+  },
+  ".pf-name": {
+    "fontSize": "13px",
+    "fontWeight": "700",
+    "color": "#1a2a4a"
+  },
+  ".pf-arrow": {
+    "fontSize": "12px",
+    "color": "#8fa3c8"
+  },
+  ".pf-remain": {
+    "fontSize": "12px",
+    "color": "#4e7cff",
+    "fontWeight": "600"
+  },
+  ".pf-bar": {
+    "height": "4px",
+    "backgroundColor": "#eef2ff",
+    "borderRadius": "99px",
+    "overflow": "hidden"
+  },
+  ".pf-fill": {
+    "height": "4px",
+    "backgroundColor": "#4e7cff",
+    "borderRadius": "99px"
+  },
+  ".map-btns": {
+    "position": "absolute",
+    "right": "14px",
+    "bottom": "90px",
+    "flexDirection": "column"
+  },
+  ".map-btn": {
+    "width": "36px",
+    "height": "36px",
+    "borderRadius": "10px",
+    "backgroundColor": "rgba(255,255,255,0.92)",
+    "alignItems": "center",
+    "justifyContent": "center",
+    "marginBottom": "8px"
+  },
+  ".map-btn-text": {
+    "fontSize": "16px",
+    "color": "#4e7cff",
+    "fontWeight": "700"
+  },
+  ".bottom-area": {
+    "flex": 1,
+    "flexDirection": "column",
+    "paddingTop": "14px",
+    "paddingLeft": "14px",
+    "paddingRight": "14px"
+  },
+  ".section-title": {
+    "flexDirection": "row",
+    "alignItems": "center",
+    "marginBottom": "10px"
+  },
+  ".icon-pin": {
+    "width": "14px",
+    "height": "14px",
+    "borderRadius": "7px",
+    "backgroundColor": "#4e7cff",
+    "marginRight": "6px"
+  },
+  ".section-title-text": {
+    "fontSize": "14px",
+    "fontWeight": "700",
+    "color": "#2d3a5e"
+  },
+  ".poi-scroll": {
+    "flexDirection": "row",
+    "width": "100%",
+    "height": "130px"
+  },
+  ".poi-card": {
+    "width": "130px",
+    "flexDirection": "column",
+    "backgroundColor": "#ffffff",
+    "borderRadius": "14px",
+    "marginRight": "10px",
+    "overflow": "hidden"
+  },
+  ".poi-img": {
+    "width": "130px",
+    "height": "72px",
+    "alignItems": "center",
+    "justifyContent": "center"
+  },
+  ".poi-emoji": {
+    "fontSize": "30px"
+  },
+  ".poi-info": {
+    "flexDirection": "column",
+    "paddingTop": "8px",
+    "paddingBottom": "10px",
+    "paddingLeft": "10px",
+    "paddingRight": "10px"
+  },
+  ".poi-name": {
+    "fontSize": "12px",
+    "fontWeight": "600",
+    "color": "#1a2a4a",
+    "marginBottom": "4px"
+  },
+  ".poi-meta": {
+    "flexDirection": "row",
+    "justifyContent": "space-between",
+    "alignItems": "center"
+  },
+  ".poi-dist": {
+    "fontSize": "10px",
+    "color": "#8fa3c8"
+  },
+  ".poi-tag": {
+    "fontSize": "9px",
+    "backgroundColor": "#eef2ff",
+    "color": "#4e7cff",
+    "borderRadius": "6px",
+    "paddingTop": "1px",
+    "paddingBottom": "1px",
+    "paddingLeft": "5px",
+    "paddingRight": "5px",
+    "fontWeight": "500"
+  }
+}
 
 /***/ }),
 
-/***/ "../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/template-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=template!./src/pages/Home/index.ux?uxType=page&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/template-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=template!./src/pages/Home/index.ux?uxType=page& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/template-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=template!./src/pages/Home/index.ux?uxType=page&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/template-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=template!./src/pages/Home/index.ux?uxType=page& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module) => {
 
 module.exports = {
   "type": "div",
   "attr": {},
+  "classList": [
+    "page"
+  ],
   "children": [
     {
-      "type": "text",
-      "attr": {
-        "value": "页面建设中"
-      }
+      "type": "div",
+      "attr": {},
+      "classList": [
+        "nav"
+      ],
+      "children": [
+        {
+          "type": "div",
+          "attr": {},
+          "classList": [
+            "brand"
+          ],
+          "children": [
+            {
+              "type": "text",
+              "attr": {
+                "value": "✦"
+              },
+              "classList": [
+                "brand-star"
+              ]
+            },
+            {
+              "type": "text",
+              "attr": {
+                "value": "TripPal"
+              },
+              "classList": [
+                "brand-name"
+              ]
+            },
+            {
+              "type": "div",
+              "attr": {},
+              "classList": [
+                "brand-tag"
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "attr": {
+                    "value": "陪你每一程"
+                  },
+                  "classList": [
+                    "brand-tag-text"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "attr": {},
+          "classList": [
+            "nav-icons"
+          ],
+          "children": [
+            {
+              "type": "text",
+              "attr": {
+                "value": "○"
+              },
+              "classList": [
+                "nav-icon-clock"
+              ]
+            },
+            {
+              "type": "text",
+              "attr": {
+                "value": "⋮"
+              },
+              "classList": [
+                "nav-icon-menu"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "div",
+      "attr": {},
+      "classList": [
+        "map-area"
+      ],
+      "children": [
+        {
+          "type": "map",
+          "attr": {
+            "id": "tripMap",
+            "latitude": function () {return this.currentLat},
+            "longitude": function () {return this.currentLng},
+            "scale": function () {return this.mapScale},
+            "markers": function () {return this.markers},
+            "polyline": function () {return this.polyline}
+          },
+          "id": "tripMap",
+          "classList": [
+            "map-comp"
+          ]
+        },
+        {
+          "type": "div",
+          "attr": {},
+          "classList": [
+            "progress-float"
+          ],
+          "children": [
+            {
+              "type": "div",
+              "attr": {},
+              "classList": [
+                "pf-row"
+              ],
+              "children": [
+                {
+                  "type": "div",
+                  "attr": {},
+                  "classList": [
+                    "pf-stations"
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "attr": {
+                        "value": function () {return this.departure}
+                      },
+                      "classList": [
+                        "pf-name"
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "attr": {
+                        "value": " → "
+                      },
+                      "classList": [
+                        "pf-arrow"
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "attr": {
+                        "value": function () {return this.destination}
+                      },
+                      "classList": [
+                        "pf-name"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "attr": {
+                    "value": function () {return '' + '剩 ' + (this.remainTime)}
+                  },
+                  "classList": [
+                    "pf-remain"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "div",
+              "attr": {},
+              "classList": [
+                "pf-bar"
+              ],
+              "children": [
+                {
+                  "type": "div",
+                  "attr": {},
+                  "classList": [
+                    "pf-fill"
+                  ],
+                  "style": {
+                    "width": function () {return '' + (this.progress) + '%'}
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "attr": {},
+          "classList": [
+            "map-btns"
+          ],
+          "children": [
+            {
+              "type": "div",
+              "attr": {},
+              "classList": [
+                "map-btn"
+              ],
+              "events": {
+                "click": "onZoomIn"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "attr": {
+                    "value": "＋"
+                  },
+                  "classList": [
+                    "map-btn-text"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "div",
+              "attr": {},
+              "classList": [
+                "map-btn"
+              ],
+              "events": {
+                "click": "onZoomOut"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "attr": {
+                    "value": "－"
+                  },
+                  "classList": [
+                    "map-btn-text"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "div",
+              "attr": {},
+              "classList": [
+                "map-btn"
+              ],
+              "events": {
+                "click": "onLocate"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "attr": {
+                    "value": "◎"
+                  },
+                  "classList": [
+                    "map-btn-text"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "div",
+      "attr": {},
+      "classList": [
+        "bottom-area"
+      ],
+      "children": [
+        {
+          "type": "div",
+          "attr": {},
+          "classList": [
+            "section-title"
+          ],
+          "children": [
+            {
+              "type": "div",
+              "attr": {},
+              "classList": [
+                "icon-pin"
+              ]
+            },
+            {
+              "type": "text",
+              "attr": {
+                "value": "目的地附近推荐"
+              },
+              "classList": [
+                "section-title-text"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "attr": {
+            "id": "poiList"
+          },
+          "classList": [
+            "poi-scroll"
+          ],
+          "id": "poiList",
+          "children": [
+            {
+              "type": "list-item",
+              "attr": {
+                "type": "poi"
+              },
+              "classList": [
+                "poi-card"
+              ],
+              "repeat": function () {return this.poiList},
+              "children": [
+                {
+                  "type": "div",
+                  "attr": {},
+                  "classList": [
+                    "poi-img"
+                  ],
+                  "style": {
+                    "backgroundColor": function () {return this.$item.color}
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "attr": {
+                        "value": function () {return this.$item.emoji}
+                      },
+                      "classList": [
+                        "poi-emoji"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "div",
+                  "attr": {},
+                  "classList": [
+                    "poi-info"
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "attr": {
+                        "value": function () {return this.$item.name}
+                      },
+                      "classList": [
+                        "poi-name"
+                      ]
+                    },
+                    {
+                      "type": "div",
+                      "attr": {},
+                      "classList": [
+                        "poi-meta"
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "attr": {
+                            "value": function () {return this.$item.dist}
+                          },
+                          "classList": [
+                            "poi-dist"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "attr": {
+                            "value": function () {return this.$item.tag}
+                          },
+                          "classList": [
+                            "poi-tag"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
@@ -108,16 +776,16 @@ var __webpack_exports__ = {};
   !*** ./src/pages/Home/index.ux?uxType=page ***!
   \*********************************************/
 
-var $app_script$ = __webpack_require__(/*! !../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/script-loader.js!../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/packager/lib/loaders/module-loader.js!../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/babel-loader/lib/index.js?cwd=c:\Users\chengyuanyuan.com\伴行无界&cacheDirectory&plugins[]=c:\Users\chengyuanyuan.com\.quickapp-studio\extensions\hapteam.hap-toolbar-1.3.9\node_modules\@hap-toolkit\dsl-xvm\lib\loaders\babel-plugin-jsx.js&comments=false&configFile=c:\Users\chengyuanyuan.com\.quickapp-studio\extensions\hapteam.hap-toolbar-1.3.9\node_modules\@hap-toolkit\packager\babel.config.js!../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/access-loader.js!../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=script!./index.ux?uxType=page */ "../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/script-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/packager/lib/loaders/module-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/babel-loader/lib/index.js?cwd=c:\\Users\\chengyuanyuan.com\\伴行无界&cacheDirectory&plugins[]=c:\\Users\\chengyuanyuan.com\\.quickapp-studio\\extensions\\hapteam.hap-toolbar-1.3.9\\node_modules\\@hap-toolkit\\dsl-xvm\\lib\\loaders\\babel-plugin-jsx.js&comments=false&configFile=c:\\Users\\chengyuanyuan.com\\.quickapp-studio\\extensions\\hapteam.hap-toolbar-1.3.9\\node_modules\\@hap-toolkit\\packager\\babel.config.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/access-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=script!./src/pages/Home/index.ux?uxType=page")
+var $app_script$ = __webpack_require__(/*! !../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/script-loader.js!../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/packager/lib/loaders/module-loader.js!../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/babel-loader/lib/index.js?cwd=C:\Users\chengyuanyuan.com\伴行无界&cacheDirectory&plugins[]=C:\Users\chengyuanyuan.com\AppData\Roaming\npm\node_modules\hap-toolkit\node_modules\@hap-toolkit\dsl-xvm\lib\loaders\babel-plugin-jsx.js&comments=false&configFile=C:\Users\chengyuanyuan.com\AppData\Roaming\npm\node_modules\hap-toolkit\node_modules\@hap-toolkit\packager\babel.config.js!../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/access-loader.js!../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=script!./index.ux?uxType=page */ "../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/script-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/packager/lib/loaders/module-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/babel-loader/lib/index.js?cwd=C:\\Users\\chengyuanyuan.com\\伴行无界&cacheDirectory&plugins[]=C:\\Users\\chengyuanyuan.com\\AppData\\Roaming\\npm\\node_modules\\hap-toolkit\\node_modules\\@hap-toolkit\\dsl-xvm\\lib\\loaders\\babel-plugin-jsx.js&comments=false&configFile=C:\\Users\\chengyuanyuan.com\\AppData\\Roaming\\npm\\node_modules\\hap-toolkit\\node_modules\\@hap-toolkit\\packager\\babel.config.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/access-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=script!./src/pages/Home/index.ux?uxType=page")
 $app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$) {
      $app_script$($app_module$, $app_exports$, $app_require$)
         if ($app_exports$.__esModule && $app_exports$.default) {
           $app_module$.exports = $app_exports$.default
         }
-    $app_module$.exports.template = __webpack_require__(/*! !../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/template-loader.js!../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=template!./index.ux?uxType=page& */ "../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/template-loader.js!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=template!./src/pages/Home/index.ux?uxType=page&")
-    $app_module$.exports.style = __webpack_require__(/*! !../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/style-loader.js?index=0&type=style!../../../../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=style!./index.ux?uxType=page */ "../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/style-loader.js?index=0&type=style!../.quickapp-studio/extensions/hapteam.hap-toolbar-1.3.9/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=style!./src/pages/Home/index.ux?uxType=page")
+    $app_module$.exports.template = __webpack_require__(/*! !../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/template-loader.js!../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=template!./index.ux?uxType=page& */ "../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/template-loader.js!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=template!./src/pages/Home/index.ux?uxType=page&")
+    $app_module$.exports.style = __webpack_require__(/*! !../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/style-loader.js?index=0&type=style!../../../../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=style!./index.ux?uxType=page */ "../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/style-loader.js?index=0&type=style!../AppData/Roaming/npm/node_modules/hap-toolkit/node_modules/@hap-toolkit/dsl-xvm/lib/loaders/fragment-loader.js?index=0&type=style!./src/pages/Home/index.ux?uxType=page")
 });
-$app_bootstrap$('@app-component/index',{ packagerVersion: "2.0.9" });
+$app_bootstrap$('@app-component/index',{ packagerVersion: "2.0.8" });
 })();
 
 /******/ })()
@@ -130,4 +798,3 @@ $app_bootstrap$('@app-component/index',{ packagerVersion: "2.0.9" });
       window.createPageHandler = createPageHandler
     }
   })();
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFnZXNcXEhvbWVcXGluZGV4LmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQ0FFQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FDRkEsbUI7Ozs7Ozs7Ozs7QUNBQTtBQUNBO0FBQ0EsWUFBWTtBQUNaO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxDOzs7Ozs7VUNYQTtVQUNBOztVQUVBO1VBQ0E7VUFDQTtVQUNBO1VBQ0E7VUFDQTtVQUNBO1VBQ0E7VUFDQTtVQUNBO1VBQ0E7VUFDQTtVQUNBOztVQUVBO1VBQ0E7O1VBRUE7VUFDQTtVQUNBOzs7Ozs7Ozs7O0FDckJBLG1CQUFtQixtQkFBTyxDQUFDLG9oRUFBa2lDO0FBQzdqQztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0Esb0NBQW9DLG1CQUFPLENBQUMsOG1CQUFzVDtBQUNsVyxpQ0FBaUMsbUJBQU8sQ0FBQyxzb0JBQWtVO0FBQzNXLENBQUM7QUFDRCx5Q0FBeUMsaUJBQWlCLE9BQXdCLEVBQUUsRSIsInNvdXJjZXMiOlsid2VicGFjazovL2JhbnhpbmcvLi9zcmMvcGFnZXMvSG9tZS9pbmRleC51eD84MTUxIiwid2VicGFjazovL2JhbnhpbmcvLi9zcmMvcGFnZXMvSG9tZS9pbmRleC51eD9mNmJhIiwid2VicGFjazovL2JhbnhpbmcvLi9zcmMvcGFnZXMvSG9tZS9pbmRleC51eD81ZjMxIiwid2VicGFjazovL2Jhbnhpbmcvd2VicGFjay9ib290c3RyYXA/N2Y4MCIsIndlYnBhY2s6Ly9iYW54aW5nLy4vc3JjL3BhZ2VzL0hvbWUvaW5kZXgudXg/YzRhNiJdLCJzb3VyY2VzQ29udGVudCI6WyI8dGVtcGxhdGU+PGRpdj48dGV4dD7pobXpnaLlu7rorr7kuK08L3RleHQ+PC9kaXY+PC90ZW1wbGF0ZT5cclxuPHNjcmlwdD5leHBvcnQgZGVmYXVsdCB7fTwvc2NyaXB0PlxyXG48c3R5bGU+PC9zdHlsZT4iLCJtb2R1bGUuZXhwb3J0cyA9IHt9IiwibW9kdWxlLmV4cG9ydHMgPSB7XG4gIFwidHlwZVwiOiBcImRpdlwiLFxuICBcImF0dHJcIjoge30sXG4gIFwiY2hpbGRyZW5cIjogW1xuICAgIHtcbiAgICAgIFwidHlwZVwiOiBcInRleHRcIixcbiAgICAgIFwiYXR0clwiOiB7XG4gICAgICAgIFwidmFsdWVcIjogXCLpobXpnaLlu7rorr7kuK1cIlxuICAgICAgfVxuICAgIH1cbiAgXVxufSIsIi8vIFRoZSBtb2R1bGUgY2FjaGVcbnZhciBfX3dlYnBhY2tfbW9kdWxlX2NhY2hlX18gPSB7fTtcblxuLy8gVGhlIHJlcXVpcmUgZnVuY3Rpb25cbmZ1bmN0aW9uIF9fd2VicGFja19yZXF1aXJlX18obW9kdWxlSWQpIHtcblx0Ly8gQ2hlY2sgaWYgbW9kdWxlIGlzIGluIGNhY2hlXG5cdHZhciBjYWNoZWRNb2R1bGUgPSBfX3dlYnBhY2tfbW9kdWxlX2NhY2hlX19bbW9kdWxlSWRdO1xuXHRpZiAoY2FjaGVkTW9kdWxlICE9PSB1bmRlZmluZWQpIHtcblx0XHRyZXR1cm4gY2FjaGVkTW9kdWxlLmV4cG9ydHM7XG5cdH1cblx0Ly8gQ3JlYXRlIGEgbmV3IG1vZHVsZSAoYW5kIHB1dCBpdCBpbnRvIHRoZSBjYWNoZSlcblx0dmFyIG1vZHVsZSA9IF9fd2VicGFja19tb2R1bGVfY2FjaGVfX1ttb2R1bGVJZF0gPSB7XG5cdFx0Ly8gbm8gbW9kdWxlLmlkIG5lZWRlZFxuXHRcdC8vIG5vIG1vZHVsZS5sb2FkZWQgbmVlZGVkXG5cdFx0ZXhwb3J0czoge31cblx0fTtcblxuXHQvLyBFeGVjdXRlIHRoZSBtb2R1bGUgZnVuY3Rpb25cblx0X193ZWJwYWNrX21vZHVsZXNfX1ttb2R1bGVJZF0obW9kdWxlLCBtb2R1bGUuZXhwb3J0cywgX193ZWJwYWNrX3JlcXVpcmVfXyk7XG5cblx0Ly8gUmV0dXJuIHRoZSBleHBvcnRzIG9mIHRoZSBtb2R1bGVcblx0cmV0dXJuIG1vZHVsZS5leHBvcnRzO1xufVxuXG4iLCJcbnZhciAkYXBwX3NjcmlwdCQgPSByZXF1aXJlKFwiIS4uLy4uLy4uLy4uLy5xdWlja2FwcC1zdHVkaW8vZXh0ZW5zaW9ucy9oYXB0ZWFtLmhhcC10b29sYmFyLTEuMy45L25vZGVfbW9kdWxlcy9AaGFwLXRvb2xraXQvZHNsLXh2bS9saWIvbG9hZGVycy9zY3JpcHQtbG9hZGVyLmpzIS4uLy4uLy4uLy4uLy5xdWlja2FwcC1zdHVkaW8vZXh0ZW5zaW9ucy9oYXB0ZWFtLmhhcC10b29sYmFyLTEuMy45L25vZGVfbW9kdWxlcy9AaGFwLXRvb2xraXQvcGFja2FnZXIvbGliL2xvYWRlcnMvbW9kdWxlLWxvYWRlci5qcyEuLi8uLi8uLi8uLi8ucXVpY2thcHAtc3R1ZGlvL2V4dGVuc2lvbnMvaGFwdGVhbS5oYXAtdG9vbGJhci0xLjMuOS9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz9jd2Q9YzpcXFxcVXNlcnNcXFxcY2hlbmd5dWFueXVhbi5jb21cXFxc5Ly06KGM5peg55WMJmNhY2hlRGlyZWN0b3J5JnBsdWdpbnNbXT1jOlxcXFxVc2Vyc1xcXFxjaGVuZ3l1YW55dWFuLmNvbVxcXFwucXVpY2thcHAtc3R1ZGlvXFxcXGV4dGVuc2lvbnNcXFxcaGFwdGVhbS5oYXAtdG9vbGJhci0xLjMuOVxcXFxub2RlX21vZHVsZXNcXFxcQGhhcC10b29sa2l0XFxcXGRzbC14dm1cXFxcbGliXFxcXGxvYWRlcnNcXFxcYmFiZWwtcGx1Z2luLWpzeC5qcyZjb21tZW50cz1mYWxzZSZjb25maWdGaWxlPWM6XFxcXFVzZXJzXFxcXGNoZW5neXVhbnl1YW4uY29tXFxcXC5xdWlja2FwcC1zdHVkaW9cXFxcZXh0ZW5zaW9uc1xcXFxoYXB0ZWFtLmhhcC10b29sYmFyLTEuMy45XFxcXG5vZGVfbW9kdWxlc1xcXFxAaGFwLXRvb2xraXRcXFxccGFja2FnZXJcXFxcYmFiZWwuY29uZmlnLmpzIS4uLy4uLy4uLy4uLy5xdWlja2FwcC1zdHVkaW8vZXh0ZW5zaW9ucy9oYXB0ZWFtLmhhcC10b29sYmFyLTEuMy45L25vZGVfbW9kdWxlcy9AaGFwLXRvb2xraXQvZHNsLXh2bS9saWIvbG9hZGVycy9hY2Nlc3MtbG9hZGVyLmpzIS4uLy4uLy4uLy4uLy5xdWlja2FwcC1zdHVkaW8vZXh0ZW5zaW9ucy9oYXB0ZWFtLmhhcC10b29sYmFyLTEuMy45L25vZGVfbW9kdWxlcy9AaGFwLXRvb2xraXQvZHNsLXh2bS9saWIvbG9hZGVycy9mcmFnbWVudC1sb2FkZXIuanM/aW5kZXg9MCZ0eXBlPXNjcmlwdCEuL2luZGV4LnV4P3V4VHlwZT1wYWdlXCIpXG4kYXBwX2RlZmluZSQoJ0BhcHAtY29tcG9uZW50L2luZGV4JywgW10sIGZ1bmN0aW9uKCRhcHBfcmVxdWlyZSQsICRhcHBfZXhwb3J0cyQsICRhcHBfbW9kdWxlJCkge1xuICAgICAkYXBwX3NjcmlwdCQoJGFwcF9tb2R1bGUkLCAkYXBwX2V4cG9ydHMkLCAkYXBwX3JlcXVpcmUkKVxuICAgICAgICBpZiAoJGFwcF9leHBvcnRzJC5fX2VzTW9kdWxlICYmICRhcHBfZXhwb3J0cyQuZGVmYXVsdCkge1xuICAgICAgICAgICRhcHBfbW9kdWxlJC5leHBvcnRzID0gJGFwcF9leHBvcnRzJC5kZWZhdWx0XG4gICAgICAgIH1cbiAgICAkYXBwX21vZHVsZSQuZXhwb3J0cy50ZW1wbGF0ZSA9IHJlcXVpcmUoXCIhLi4vLi4vLi4vLi4vLnF1aWNrYXBwLXN0dWRpby9leHRlbnNpb25zL2hhcHRlYW0uaGFwLXRvb2xiYXItMS4zLjkvbm9kZV9tb2R1bGVzL0BoYXAtdG9vbGtpdC9kc2wteHZtL2xpYi9sb2FkZXJzL3RlbXBsYXRlLWxvYWRlci5qcyEuLi8uLi8uLi8uLi8ucXVpY2thcHAtc3R1ZGlvL2V4dGVuc2lvbnMvaGFwdGVhbS5oYXAtdG9vbGJhci0xLjMuOS9ub2RlX21vZHVsZXMvQGhhcC10b29sa2l0L2RzbC14dm0vbGliL2xvYWRlcnMvZnJhZ21lbnQtbG9hZGVyLmpzP2luZGV4PTAmdHlwZT10ZW1wbGF0ZSEuL2luZGV4LnV4P3V4VHlwZT1wYWdlJlwiKVxuICAgICRhcHBfbW9kdWxlJC5leHBvcnRzLnN0eWxlID0gcmVxdWlyZShcIiEuLi8uLi8uLi8uLi8ucXVpY2thcHAtc3R1ZGlvL2V4dGVuc2lvbnMvaGFwdGVhbS5oYXAtdG9vbGJhci0xLjMuOS9ub2RlX21vZHVsZXMvQGhhcC10b29sa2l0L2RzbC14dm0vbGliL2xvYWRlcnMvc3R5bGUtbG9hZGVyLmpzP2luZGV4PTAmdHlwZT1zdHlsZSEuLi8uLi8uLi8uLi8ucXVpY2thcHAtc3R1ZGlvL2V4dGVuc2lvbnMvaGFwdGVhbS5oYXAtdG9vbGJhci0xLjMuOS9ub2RlX21vZHVsZXMvQGhhcC10b29sa2l0L2RzbC14dm0vbGliL2xvYWRlcnMvZnJhZ21lbnQtbG9hZGVyLmpzP2luZGV4PTAmdHlwZT1zdHlsZSEuL2luZGV4LnV4P3V4VHlwZT1wYWdlXCIpXG59KTtcbiRhcHBfYm9vdHN0cmFwJCgnQGFwcC1jb21wb25lbnQvaW5kZXgnLHsgcGFja2FnZXJWZXJzaW9uOiBRVUlDS0FQUF9UT09MS0lUX1ZFUlNJT04gfSk7Il0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9

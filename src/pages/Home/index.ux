@@ -1,3 +1,347 @@
-<template><div><text>页面建设中</text></div></template>
-<script>export default {}</script>
-<style></style>
+<!-- pages/Chat/index.ux 里 -->
+<import name="trip-card" src="/components/TripCard.ux"></import>
+<import name="env-card"  src="/components/EnvCard.ux"></import>
+<template>
+  <div class="page">
+
+    <!-- 导航栏 -->
+    <div class="nav">
+      <div class="brand">
+        <text class="brand-star">✦</text>
+        <text class="brand-name">TripPal</text>
+        <div class="brand-tag">
+          <text class="brand-tag-text">陪你每一程</text>
+        </div>
+      </div>
+      <div class="nav-icons">
+        <text class="nav-icon-clock">○</text>
+        <text class="nav-icon-menu">⋮</text>
+      </div>
+    </div>
+
+    <!-- 地图区域 -->
+    <div class="map-area">
+      <map
+        id="tripMap"
+        class="map-comp"
+        latitude="{{currentLat}}"
+        longitude="{{currentLng}}"
+        scale="{{mapScale}}"
+        markers="{{markers}}"
+        polyline="{{polyline}}">
+      </map>
+
+      <!-- 悬浮的进度卡片 -->
+      <div class="progress-float">
+        <div class="pf-row">
+          <div class="pf-stations">
+            <text class="pf-name">{{departure}}</text>
+            <text class="pf-arrow"> → </text>
+            <text class="pf-name">{{destination}}</text>
+          </div>
+          <text class="pf-remain">剩 {{remainTime}}</text>
+        </div>
+        <div class="pf-bar">
+          <div class="pf-fill" style="width: {{progress}}%;"></div>
+        </div>
+      </div>
+
+      <!-- 右下角控制按钮 -->
+      <div class="map-btns">
+        <div class="map-btn" onclick="onZoomIn"><text class="map-btn-text">＋</text></div>
+        <div class="map-btn" onclick="onZoomOut"><text class="map-btn-text">－</text></div>
+        <div class="map-btn" onclick="onLocate"><text class="map-btn-text">◎</text></div>
+      </div>
+    </div>
+
+    <!-- 下方推荐滚动区 -->
+    <div class="bottom-area">
+      <div class="section-title">
+        <div class="icon-pin"></div>
+        <text class="section-title-text">目的地附近推荐</text>
+      </div>
+
+      <list class="poi-scroll" id="poiList">
+        <list-item type="poi" class="poi-card" for="{{poiList}}">
+          <div class="poi-img" style="background-color: {{$item.color}};">
+            <text class="poi-emoji">{{$item.emoji}}</text>
+          </div>
+          <div class="poi-info">
+            <text class="poi-name">{{$item.name}}</text>
+            <div class="poi-meta">
+              <text class="poi-dist">{{$item.dist}}</text>
+              <text class="poi-tag">{{$item.tag}}</text>
+            </div>
+          </div>
+        </list-item>
+      </list>
+    </div>
+
+  </div>
+</template>
+
+<script>
+export default {
+  data: {
+    currentLat: 30.297,
+    currentLng: 120.213,
+    mapScale: 12,
+    departure: '杭州东站',
+    destination: '上海虹桥站',
+    remainTime: '32 分钟',
+    progress: 52,
+
+    markers: [
+      {
+        id: 1,
+        latitude: 30.297,
+        longitude: 120.213,
+        title: '杭州东站',
+        iconPath: '/common/marker_start.png'
+      },
+      {
+        id: 2,
+        latitude: 31.194,
+        longitude: 121.320,
+        title: '上海虹桥站',
+        iconPath: '/common/marker_end.png'
+      }
+    ],
+
+    polyline: [
+      {
+        points: [
+          { latitude: 30.297, longitude: 120.213 },
+          { latitude: 30.6,   longitude: 120.6 },
+          { latitude: 30.9,   longitude: 120.9 },
+          { latitude: 31.194, longitude: 121.320 }
+        ],
+        color: '#4e7cff',
+        width: 4,
+        dottedLine: false
+      }
+    ],
+
+    poiList: [
+      { name: '外滩',     dist: '距终点 2.1km', tag: '景点', emoji: '🏛️', color: '#ffe3ec' },
+      { name: '豫园',     dist: '距终点 3.4km', tag: '景点', emoji: '🌿', color: '#e3f8ec' },
+      { name: '南翔小笼', dist: '距终点 1.8km', tag: '美食', emoji: '🍜', color: '#fff3e0' },
+      { name: '陆家嘴',   dist: '距终点 4.2km', tag: '景点', emoji: '🏙️', color: '#e3edff' }
+    ]
+  },
+
+  onInit() {},
+
+  onZoomIn() {
+    this.mapScale = Math.min(this.mapScale + 1, 20);
+  },
+  onZoomOut() {
+    this.mapScale = Math.max(this.mapScale - 1, 3);
+  },
+  onLocate() {
+    // 重新定位到当前位置，可调用系统定位接口后更新 currentLat/currentLng
+  }
+}
+</script>
+
+<style>
+  .page {
+    flex-direction: column;
+    background-color: #f0f4ff;
+    height: 100%;
+  }
+
+  /* ===== 导航栏 ===== */
+  .nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: #ffffff;
+  }
+
+  .brand { flex-direction: row; align-items: center; }
+  .brand-star { font-size: 16px; color: #4e7cff; margin-right: 5px; font-weight: 700; }
+  .brand-name { font-size: 20px; font-weight: 800; color: #1a2a4a; margin-right: 8px; }
+  .brand-tag {
+    background-color: #eef2ff;
+    border-radius: 20px;
+    padding-top: 3px; padding-bottom: 3px;
+    padding-left: 10px; padding-right: 10px;
+  }
+  .brand-tag-text { font-size: 11px; color: #4e7cff; font-weight: 500; }
+  .nav-icons { flex-direction: row; align-items: center; }
+  .nav-icon-clock { font-size: 20px; color: #8fa3c8; margin-right: 16px; }
+  .nav-icon-menu { font-size: 22px; color: #8fa3c8; font-weight: 700; }
+
+  /* ===== 地图区域 ===== */
+  .map-area {
+    height: 340px;
+    position: relative;
+  }
+
+  .map-comp {
+    width: 100%;
+    height: 340px;
+  }
+
+  /* 悬浮进度卡片 */
+  .progress-float {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    right: 60px;
+    background-color: rgba(255,255,255,0.92);
+    border-radius: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+    flex-direction: column;
+  }
+
+  .pf-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .pf-stations { flex-direction: row; align-items: center; }
+  .pf-name { font-size: 13px; font-weight: 700; color: #1a2a4a; }
+  .pf-arrow { font-size: 12px; color: #8fa3c8; }
+  .pf-remain { font-size: 12px; color: #4e7cff; font-weight: 600; }
+
+  .pf-bar {
+    height: 4px;
+    background-color: #eef2ff;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .pf-fill {
+    height: 4px;
+    background-color: #4e7cff;
+    border-radius: 99px;
+  }
+
+  /* 右下角按钮 */
+  .map-btns {
+    position: absolute;
+    right: 14px;
+    bottom: 90px;
+    flex-direction: column;
+  }
+
+  .map-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.92);
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .map-btn-text {
+    font-size: 16px;
+    color: #4e7cff;
+    font-weight: 700;
+  }
+
+  /* ===== 下方推荐区 ===== */
+  .bottom-area {
+    flex: 1;
+    flex-direction: column;
+    padding-top: 14px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .section-title {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .icon-pin {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    background-color: #4e7cff;
+    margin-right: 6px;
+  }
+
+  .section-title-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2d3a5e;
+  }
+
+  .poi-scroll {
+    flex-direction: row;
+    width: 100%;
+    height: 130px;
+  }
+
+  .poi-card {
+    width: 130px;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 14px;
+    margin-right: 10px;
+    overflow: hidden;
+  }
+
+  .poi-img {
+    width: 130px;
+    height: 72px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .poi-emoji {
+    font-size: 30px;
+  }
+
+  .poi-info {
+    flex-direction: column;
+    padding-top: 8px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .poi-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a2a4a;
+    margin-bottom: 4px;
+  }
+
+  .poi-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .poi-dist {
+    font-size: 10px;
+    color: #8fa3c8;
+  }
+
+  .poi-tag {
+    font-size: 9px;
+    background-color: #eef2ff;
+    color: #4e7cff;
+    border-radius: 6px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: 500;
+  }
+</style>
