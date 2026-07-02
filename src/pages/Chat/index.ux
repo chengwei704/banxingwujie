@@ -1,5 +1,6 @@
-<import name="trip-card" src="/components/TripCard.ux"></import>
-<import name="env-card"  src="/components/EnvCard.ux"></import>
+<import name="trip-card" src="../../components/TripCard.ux"></import>
+<import name="env-card"  src="../../components/EnvCard.ux"></import>
+ 
 
 <template>
   <div class="page">
@@ -20,50 +21,66 @@
     </div>
 
     <!-- 滚动内容区 -->
-    <scroll class="scroll-area" scroll-direction="vertical">
-      <div class="scroll-inner">
-
-        <!-- 第一条气泡 -->
-        <div class="msg-row">
-          <div class="avatar">
-            <image class="avatar-img" src="/assets/images/avatar.png"></image>
-          </div>
-          <div class="bubble-wrap">
-            <div class="bubble">
-              <text class="bubble-text">你好！我是你的旅行伙伴 TripPal ✨{{'\n'}}无论网络如何，我都会陪伴你{{'\n'}}让每一段旅程都安心又愉快</text>
-            </div>
-            <text class="bubble-time">10:30</text>
-          </div>
-        </div>
-
-        <!-- 行程卡片（引入） -->
-        <div class="card-wrap">
-          <trip-card></trip-card>
-        </div>
-
-        <!-- 环境卡片（引入） -->
-        <div class="card-wrap">
-          <env-card></env-card>
-        </div>
-
-        <!-- 第二条气泡 -->
-        <div class="msg-row">
-          <div class="avatar">
-            <image class="avatar-img" src="/assets/images/avatar.png"></image>
-          </div>
-          <div class="bubble-wrap">
-            <div class="bubble bubble-offline">
-              <text class="bubble-text">目前处于无网络状态，{{'\n'}}我已切换至离线模式{{'\n'}}我会继续为你提供提醒和陪伴～</text>
-            </div>
-            <text class="bubble-time">10:30</text>
-          </div>
-        </div>
-
-        <!-- 底部留白 -->
-        <div class="bottom-space"></div>
-
+  <!-- 滚动内容区 -->
+<div class="scroll-area" style="flex:1;">
+  <div class="scroll-inner">
+    <!-- 用 for 循环渲染消息列表 -->
+    <div class="msg-row" for="(index, msg) in messages">
+      <div class="avatar">
+        <image class="avatar-img" src="/assets/images/avatar.png"></image>
       </div>
-    </scroll>
+      <div class="bubble-wrap">
+        <div class="bubble" if="{{msg.role === 'assistant'}}">
+          <text class="bubble-text">{{msg.content}}</text>
+        </div>
+        <div class="bubble bubble-offline" if="{{msg.role === 'user'}}">
+          <text class="bubble-text">{{msg.content}}</text>
+        </div>
+        <text class="bubble-time">{{msg.time}}</text>
+      </div>
+    </div>
+    
+    <!-- 第一条气泡 -->
+    <div class="msg-row">
+      <div class="avatar">
+        <image class="avatar-img" src="/assets/images/avatar(1).png"></image>
+      </div>
+      <div class="bubble-wrap">
+        <div class="bubble">
+          <text class="bubble-text">你好！我是你的旅行伙伴 TripPal ✨{{'\n'}}无论网络如何，我都会陪伴你{{'\n'}}让每一段旅程都安心又愉快</text>
+        </div>
+        <text class="bubble-time">10:30</text>
+      </div>
+    </div>
+
+    <!-- 行程卡片（引入） -->
+    <div class="card-wrap">
+      <trip-card></trip-card>
+    </div>
+
+    <!-- 环境卡片（引入） -->
+    <div class="card-wrap">
+      <env-card></env-card>
+    </div>
+
+    <!-- 第二条气泡 -->
+    <div class="msg-row">
+      <div class="avatar">
+        <image class="avatar-img" src="/assets/images/avatar.png"></image>
+      </div>
+      <div class="bubble-wrap">
+        <div class="bubble bubble-offline">
+          <text class="bubble-text">目前处于无网络状态，{{'\n'}}我已切换至离线模式{{'\n'}}我会继续为你提供提醒和陪伴～</text>
+        </div>
+        <text class="bubble-time">10:30</text>
+      </div>
+    </div>
+
+    <!-- 底部留白 -->
+    <div class="bottom-space"></div>
+
+  </div>
+</div>
 
     <!-- 快捷功能栏 -->
     <div class="quick-bar">
@@ -98,24 +115,162 @@
     </div>
 
     <!-- 输入栏 -->
-    <div class="input-bar">
-      <div class="input-field">
-        <text class="input-placeholder">告诉我你的需求吧～</text>
-      </div>
-      <text class="emoji-btn">🙂</text>
-      <div class="send-btn">
-        <text class="send-icon">➤</text>
-      </div>
-    </div>
+    <!-- 输入栏 -->
+<div class="input-bar">
+  <input class="input-field" 
+         type="text" 
+         placeholder="告诉我你的需求吧～" 
+         value="{{inputText}}" 
+        @change="onInput" />
+  <text class="emoji-btn">🙂</text>
+  <div class="send-btn" @click="onSend">
+    <text class="send-icon">➤</text>
+  </div>
+</div>
 
   </div>
 </template>
 
 <script>
+
+// import { execSQL } from '../../js/db.js'
+
 export default {
-  onInit() {}
+  data() {
+  return {
+    messages: [],
+    currentCity: '上海',
+    cityData: null,
+    inputText: ''    // ← 新增这一行
+  }
+},
+
+// 处理输入框变化
+onInput(e) {
+  this.inputText = e.value
+},
+
+// 点击发送按钮
+onSend() {
+  const text = this.inputText.trim()
+  if (!text) return
+  this.sendMessage(text)
+  this.inputText = ''   // 清空输入框
+},
+  // ✅ 改用 onReady，更稳定
+  async onReady() {
+    await this.loadHistory()
+    await this.loadCityData()
+    console.log('✅ 页面初始化完成')
+  },
+
+  // 加载历史消息
+  async loadHistory() {
+    try {
+      const sql = `SELECT * FROM chat_history ORDER BY timestamp ASC LIMIT 50`
+      const result = await execSQL(sql)
+      if (result.rows) {
+        this.messages = result.rows.map(row => ({
+          role: row.role,
+          content: row.content,
+          time: row.timestamp
+        }))
+      }
+      console.log('✅ 加载历史消息成功，共', this.messages.length, '条')
+    } catch (err) {
+      console.error('❌ 加载历史失败', err)
+    }
+  },
+
+  // 加载城市数据
+  async loadCityData() {
+    try {
+      // const sql = `SELECT * FROM city_data WHERE city_name = ?`
+      const result = await execSQL(sql, [this.currentCity])
+      if (result.rows && result.rows.length > 0) {
+        const data = result.rows[0]
+        this.cityData = {
+          attractions: JSON.parse(data.attractions),
+          tips: JSON.parse(data.tips),
+          food: JSON.parse(data.food)
+        }
+        console.log('✅ 加载城市数据成功', this.cityData)
+      }
+    } catch (err) {
+      console.error('❌ 加载城市数据失败', err)
+    }
+  },
+
+  // 保存消息
+  async saveMessage(role, content) {
+    // try {
+    //   const sql = `
+    //     INSERT INTO chat_history (role, content, timestamp, synced)
+    //     VALUES (?, ?, ?, 0)
+    //   `
+    //   await execSQL(sql, [role, content, new Date().toISOString()])
+    // } catch (err) {
+    //   console.error('❌ 保存消息失败', err)
+    // }
+  },
+
+  // 发送消息
+  async sendMessage(input) {
+    if (!input) return
+
+  this.messages.push({ 
+  role: 'user', 
+  content: input, 
+  time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }) 
+})
+   
+    // await this.saveMessage('user', input)
+
+    // if (navigator.onLine) {
+    //   try {
+    //     const reply = await this.callAI(input)
+    //     this.messages.push({ role: 'assistant', content: reply, time: new Date().toLocaleString() })
+    //     await this.saveMessage('assistant', reply)
+    //   } catch (err) {
+    //     this.getOfflineReply(input)
+    //   }
+    // } else {
+    //   this.getOfflineReply(input)
+    // }
+  },
+
+  // 离线回答
+  getOfflineReply(input) {
+    let reply = '🕊️ 团团离线提示：'
+    if (input.includes('景点') || input.includes('玩')) {
+      reply += `\n推荐景点：${this.cityData?.attractions?.join('、') || '外滩、豫园'}`
+    } else if (input.includes('吃') || input.includes('美食')) {
+      reply += `\n推荐美食：${this.cityData?.food?.join('、') || '小笼包、生煎'}`
+    } else {
+      reply += `\n当前在${this.currentCity}，有需要随时问我~`
+    }
+    this.messages.push({ role: 'assistant', content: reply, time: new Date().toLocaleString() })
+    this.saveMessage('assistant', reply)
+  },
+
+  // 调用后端AI
+  async callAI(input) {
+    try {
+      const res = await fetch('http://localhost:3000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ msg: input })
+      })
+      const data = await res.json()
+      return data.reply || '团团暂时走神了，再问一次吧~'
+    } catch (err) {
+      console.error('调用AI失败', err)
+      throw err
+    }
+  }
 }
 </script>
+
 
 <style>
   .page {
@@ -317,7 +472,7 @@ export default {
     margin-bottom: 6px;
   }
 
-  .quick-icon-wrap.red {
+  .quick-icon-wrap{
     background-color: #fff0f0;
   }
 
@@ -376,19 +531,20 @@ export default {
     padding-right: 14px;
   }
 
-  .input-field {
-    flex: 1;
-    background-color: rgba(255, 255, 255, 0.28);
-    border-radius: 24px;
-    padding-top: 11px;
-    padding-bottom: 11px;
-    padding-left: 18px;
-    padding-right: 16px;
-    margin-right: 10px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(100, 150, 255, 0.22);
-  }
+.input-field {
+  flex: 1;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.28);
+  border-radius: 24px;
+  padding-left: 18px;
+  padding-right: 16px;
+  margin-right: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(100, 216, 255, 0.22);
+  font-size: 14px;
+  color: #2d3a5e;
+}
 
   .input-placeholder {
     font-size: 14px;

@@ -5,27 +5,47 @@
   "versionName": "1.0.0",
   "minPlatformVersion": 1080,
   "icon": "assets/images/logo.png",
-  "config": {
-    "logLevel": "off"
-  },
-  "features": [
-    { "name": "system.network" },
-    { "name": "system.battery" },
-    { "name": "system.database" },
-    { "name": "system.fetch" },
-    { "name": "system.geolocation" },
-    { "name": "system.map" }
-  ],
+  "config": { "logLevel": "off" },
   "permissions": [
-    { "origin": "*" }
+    {
+      "origin": "*"
+    }
+  ],
+  "features": [
+    {
+      "name": "system.network"
+    },
+    {
+      "name": "system.battery"
+    },
+    {
+      "name": "system.database"
+    },
+    {
+      "name": "system.fetch"
+    },
+    {
+      "name": "system.geolocation"
+    },
+    {
+      "name": "system.map"
+    }
   ],
   "router": {
     "entry": "pages/Chat",
     "pages": {
-      "pages/Home":       { "component": "index" },
-      "pages/Chat":       { "component": "index" },
-      "pages/Navigation": { "component": "index" },
-      "pages/Profile":    { "component": "index" }
+      "pages/Chat": {
+        "component": "index"
+      },
+      "pages/Home": {
+        "component": "index"
+      },
+      "pages/Profile": {
+        "component": "index"
+      },
+      "pages/Navigation": {
+        "component": "index"
+      }
     },
     "tabBar": {
       "textColor": "#8fa3c8",
@@ -63,7 +83,8 @@
         "titleBarText": "伴行无界"
       },
       "pages/Home": {
-        "titleBarText": "地图"
+        "titleBarText": "地图",
+        "titleBar": false
       },
       "pages/Profile": {
         "titleBarText": "我的"
