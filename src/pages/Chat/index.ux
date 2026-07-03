@@ -22,64 +22,54 @@
 
     <!-- 滚动内容区 -->
   <!-- 滚动内容区 -->
-<div class="scroll-area" style="flex:1;">
-  <div class="scroll-inner">
-    <!-- 用 for 循环渲染消息列表 -->
-    <div class="msg-row" for="(index, msg) in messages">
+  <div class="scroll-area" style="flex:1;">
+<div class="scroll-inner">
+  <!-- 1. 问候语 + 卡片（固定显示） -->
+  <div class="msg-row">
+    <div class="avatar">
+      <image class="avatar-img" src="/assets/images/avatar.png"></image>
+    </div>
+    <div class="bubble-wrap">
+      <div class="bubble">
+        <text class="bubble-text">你好！我是你的旅行伙伴 TripPal ✨{{'\n'}}无论网络如何，我都会陪伴你{{'\n'}}让每一段旅程都安心又愉快</text>
+      </div>
+      <text class="bubble-time">{{greetingTime1}}</text>
+    </div>
+  </div>
+
+  <!-- 行程卡片 -->
+  <div class="card-wrap">
+    <trip-card></trip-card>
+  </div>
+
+  <!-- 环境卡片 -->
+  <div class="card-wrap">
+    <env-card></env-card>
+  </div>
+
+  <!-- 2. 动态消息列表（用户发送的消息显示在这里） -->
+  <div class="msg-row" for="(index, msg) in messages">
+    <!-- AI消息：靠左 -->
+    <div class="msg-left" if="{{msg.role === 'assistant'}}">
       <div class="avatar">
         <image class="avatar-img" src="/assets/images/avatar.png"></image>
       </div>
       <div class="bubble-wrap">
-        <div class="bubble" if="{{msg.role === 'assistant'}}">
-          <text class="bubble-text">{{msg.content}}</text>
-        </div>
-        <div class="bubble bubble-offline" if="{{msg.role === 'user'}}">
-          <text class="bubble-text">{{msg.content}}</text>
-        </div>
+        <div class="bubble"><text class="bubble-text">{{msg.content}}</text></div>
         <text class="bubble-time">{{msg.time}}</text>
       </div>
     </div>
-    
-    <!-- 第一条气泡 -->
-    <div class="msg-row">
-      <div class="avatar">
-        <image class="avatar-img" src="/assets/images/avatar(1).png"></image>
-      </div>
+    <!-- 用户消息：靠右 -->
+    <div class="msg-right" if="{{msg.role === 'user'}}">
       <div class="bubble-wrap">
-        <div class="bubble">
-          <text class="bubble-text">你好！我是你的旅行伙伴 TripPal ✨{{'\n'}}无论网络如何，我都会陪伴你{{'\n'}}让每一段旅程都安心又愉快</text>
-        </div>
-        <text class="bubble-time">10:30</text>
+        <div class="bubble-user"><text class="bubble-text">{{msg.content}}</text></div>
+        <text class="bubble-time" style="text-align: right;">{{msg.time}}</text>
       </div>
     </div>
-
-    <!-- 行程卡片（引入） -->
-    <div class="card-wrap">
-      <trip-card></trip-card>
-    </div>
-
-    <!-- 环境卡片（引入） -->
-    <div class="card-wrap">
-      <env-card></env-card>
-    </div>
-
-    <!-- 第二条气泡 -->
-    <div class="msg-row">
-      <div class="avatar">
-        <image class="avatar-img" src="/assets/images/avatar.png"></image>
-      </div>
-      <div class="bubble-wrap">
-        <div class="bubble bubble-offline">
-          <text class="bubble-text">目前处于无网络状态，{{'\n'}}我已切换至离线模式{{'\n'}}我会继续为你提供提醒和陪伴～</text>
-        </div>
-        <text class="bubble-time">10:30</text>
-      </div>
-    </div>
-
-    <!-- 底部留白 -->
-    <div class="bottom-space"></div>
-
   </div>
+
+  <div class="bottom-space"></div>
+</div>
 </div>
 
     <!-- 快捷功能栏 -->
@@ -115,14 +105,13 @@
     </div>
 
     <!-- 输入栏 -->
-    <!-- 输入栏 -->
 <div class="input-bar">
   <input class="input-field" 
          type="text" 
          placeholder="告诉我你的需求吧～" 
          value="{{inputText}}" 
         @change="onInput" />
-  <text class="emoji-btn">🙂</text>
+  <!-- <text class="emoji-btn">🙂</text> -->
   <div class="send-btn" @click="onSend">
     <text class="send-icon">➤</text>
   </div>
@@ -137,11 +126,22 @@
 
 export default {
   data() {
+  const now = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
   return {
+    greetingTime1:now,
     messages: [],
     currentCity: '上海',
     cityData: null,
-    inputText: ''    // ← 新增这一行
+    inputText: '' ,   // ← 新增这一行
+    tripData: {
+      startPlace: '杭州东站',
+      endPlace: '上海虹桥站',
+      startTime: '10:00',
+      endTime: '11:02',
+      remainTime: 32,
+      arriveTime: '11:02',
+      progress: 60
+    }
   }
 },
 
@@ -215,29 +215,29 @@ onSend() {
   },
 
   // 发送消息
-  async sendMessage(input) {
-    if (!input) return
+async sendMessage(input) {
+  if (!input) return
 
+  // ✅ 用户消息：使用当前时间
+  const now = new Date()
+  const timeStr = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+  
   this.messages.push({ 
-  role: 'user', 
-  content: input, 
-  time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }) 
-})
-   
-    // await this.saveMessage('user', input)
+    role: 'user', 
+    content: input, 
+    time: timeStr 
+  })
 
-    // if (navigator.onLine) {
-    //   try {
-    //     const reply = await this.callAI(input)
-    //     this.messages.push({ role: 'assistant', content: reply, time: new Date().toLocaleString() })
-    //     await this.saveMessage('assistant', reply)
-    //   } catch (err) {
-    //     this.getOfflineReply(input)
-    //   }
-    // } else {
-    //   this.getOfflineReply(input)
-    // }
-  },
+  // 调用 AI...
+  const reply = await this.callAI(input)
+  
+  // ✅ AI回复：也使用当前时间（或者用同一个 now）
+  this.messages.push({ 
+    role: 'assistant', 
+    content: reply, 
+    time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+  })
+},
 
   // 离线回答
   getOfflineReply(input) {
@@ -358,10 +358,30 @@ onSend() {
   /* ===== 气泡行 ===== */
   .msg-row {
     flex-direction: row;
-    align-items: flex-start;
+    width: 100%;
     margin-bottom: 12px;
-  }
+ }
 
+.msg-left {
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+.msg-right {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+}
+.bubble-user {
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin-bottom: 4px;
+}
+.bubble-user .bubble-text {
+  color: #2d3a5e;
+}
   .avatar {
     width: 46px;
     height: 46px;
@@ -378,7 +398,6 @@ onSend() {
   }
 
   .bubble-wrap {
-    flex: 1;
     flex-direction: column;
   }
 

@@ -114,7 +114,7 @@ export default {
   .card-link-text {
     font-size: 13px;
     color: #8fa3c8;
-    text-align: right;
+     text-align: right; 
   }
 
   .route-container {
