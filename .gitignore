@@ -1,0 +1,9 @@
+# 依赖目录（太大了，不用上传）
+node_modules/
+
+# 环境变量（包含 API Key，绝对不能上传！）
+.env
+
+# 系统文件
+.DS_Store
+Thumbs.db
