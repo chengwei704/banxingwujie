@@ -1,0 +1,25 @@
+<script>
+import { openDB, closeDB } from './js/db'
+import { createTables, initMockData } from './js/initData'
+
+export default {
+  onCreate() {
+    this.initDatabase()
+  },
+
+  async initDatabase() {
+    try {
+      await openDB()
+      await createTables()
+      await initMockData()
+      console.log('✅ 数据库初始化完成')
+    } catch (err) {
+      console.error('❌ 数据库初始化失败', err)
+    }
+  },
+
+  onDestroy() {
+    closeDB()
+  }
+}
+</script>

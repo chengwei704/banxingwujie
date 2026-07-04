@@ -1,0 +1,97 @@
+{
+  "package": "com.banxing.app",
+  "name": "伴行无界",
+  "versionCode": 1,
+  "versionName": "1.0.0",
+  "minPlatformVersion": 1080,
+  "icon": "assets/images/logo.png",
+  "config": { "logLevel": "off" },
+  "permissions": [
+    {
+      "origin": "*"
+    }
+  ],
+  "features": [
+    {
+      "name": "system.network"
+    },
+    {
+      "name": "system.battery"
+    },
+    {
+      "name": "system.database"
+    },
+    {
+      "name": "system.fetch"
+    },
+    {
+      "name": "system.geolocation"
+    },
+    {
+      "name": "system.map"
+    }
+  ],
+  "router": {
+    "entry": "pages/Chat",
+    "pages": {
+      "pages/Chat": {
+        "component": "index"
+      },
+      "pages/Home": {
+        "component": "index"
+      },
+      "pages/Profile": {
+        "component": "index"
+      },
+      "pages/Navigation": {
+        "component": "index"
+      }
+    },
+    "tabBar": {
+      "textColor": "#8fa3c8",
+      "selectedColor": "#4e7cff",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#f0f4fa",
+      "tabBarList": [
+        {
+          "text": "聊天",
+          "icon": "assets/images/tab-chat.png",
+          "activeIcon": "assets/images/tab-chat-active.png",
+          "path": "pages/Chat"
+        },
+        {
+          "text": "地图",
+          "icon": "assets/images/tab-map.png",
+          "activeIcon": "assets/images/tab-map-active.png",
+          "path": "pages/Home"
+        },
+        {
+          "text": "我的",
+          "icon": "assets/images/tab-profile.png",
+          "activeIcon": "assets/images/tab-profile-active.png",
+          "path": "pages/Profile"
+        }
+      ]
+    }
+  },
+  "display": {
+    "titleBarBackgroundColor": "#FF8C69",
+    "titleBarTextColor": "#FFFFFF",
+    "titleBarText": "伴行无界",
+    "pages": {
+      "pages/Chat": {
+        "titleBarText": "伴行无界"
+      },
+      "pages/Home": {
+        "titleBarText": "地图",
+        "titleBar": false
+      },
+      "pages/Profile": {
+        "titleBarText": "我的"
+      },
+      "pages/Navigation": {
+        "titleBarText": "导航"
+      }
+    }
+  }
+}

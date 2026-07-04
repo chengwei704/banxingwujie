@@ -1,0 +1,591 @@
+<import name="trip-card" src="../../components/TripCard.ux"></import>
+<import name="env-card"  src="../../components/EnvCard.ux"></import>
+ 
+
+<template>
+  <div class="page">
+
+    <!-- 导航栏 -->
+    <div class="nav">
+      <div class="brand">
+        <text class="brand-star">✦</text>
+        <text class="brand-name">团团</text>
+        <div class="brand-tag">
+          <text class="brand-tag-text">陪你每一程</text>
+        </div>
+      </div>
+      <div class="nav-icons">
+        <text class="nav-icon-clock">○</text>
+        <text class="nav-icon-menu">⋮</text>
+      </div>
+    </div>
+
+    <!-- 滚动内容区 -->
+  <!-- 滚动内容区 -->
+  <div class="scroll-area" style="flex:1;">
+<div class="scroll-inner">
+  <!-- 1. 问候语 + 卡片（固定显示） -->
+  <div class="msg-row">
+    <div class="avatar">
+      <image class="avatar-img" src="/assets/images/avatar.png"></image>
+    </div>
+    <div class="bubble-wrap">
+      <div class="bubble">
+        <text class="bubble-text">你好！我是你的旅行伙伴 TripPal ✨{{'\n'}}无论网络如何，我都会陪伴你{{'\n'}}让每一段旅程都安心又愉快</text>
+      </div>
+      <text class="bubble-time">{{greetingTime1}}</text>
+    </div>
+  </div>
+
+  <!-- 行程卡片 -->
+  <div class="card-wrap">
+    <trip-card></trip-card>
+  </div>
+
+  <!-- 环境卡片 -->
+  <div class="card-wrap">
+    <env-card></env-card>
+  </div>
+
+  <!-- 2. 动态消息列表（用户发送的消息显示在这里） -->
+  <div class="msg-row" for="(index, msg) in messages">
+    <!-- AI消息：靠左 -->
+    <div class="msg-left" if="{{msg.role === 'assistant'}}">
+      <div class="avatar">
+        <image class="avatar-img" src="/assets/images/avatar.png"></image>
+      </div>
+      <div class="bubble-wrap">
+        <div class="bubble"><text class="bubble-text">{{msg.content}}</text></div>
+        <text class="bubble-time">{{msg.time}}</text>
+      </div>
+    </div>
+    <!-- 用户消息：靠右 -->
+    <div class="msg-right" if="{{msg.role === 'user'}}">
+      <div class="bubble-wrap">
+        <div class="bubble-user"><text class="bubble-text">{{msg.content}}</text></div>
+        <text class="bubble-time" style="text-align: right;">{{msg.time}}</text>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-space"></div>
+</div>
+</div>
+
+    <!-- 快捷功能栏 -->
+    <div class="quick-bar">
+      <div class="quick-item">
+        <div class="quick-icon-wrap">
+          <text class="quick-icon-text">🔔</text>
+        </div>
+        <text class="quick-label">到站提醒</text>
+        <text class="quick-sub">已开启</text>
+      </div>
+
+      <div class="quick-item">
+        <div class="quick-icon-wrap">
+          <text class="quick-icon-text">🗺</text>
+        </div>
+        <text class="quick-label">行程进度</text>
+        <text class="quick-sub">查看进度</text>
+      </div>
+
+      <div class="quick-item">
+        <div class="quick-icon-wrap red">
+          <text class="quick-icon-text">💬</text>
+        </div>
+        <text class="quick-label">陪我聊天</text>
+        <text class="quick-sub">打发时间</text>
+      </div>
+
+      <div class="quick-item">
+        <text class="more-dots">···</text>
+        <text class="more-label">更多功能</text>
+      </div>
+    </div>
+
+    <!-- 输入栏 -->
+<div class="input-bar">
+  <input class="input-field" 
+         type="text" 
+         placeholder="告诉我你的需求吧～" 
+         value="{{inputText}}" 
+        @change="onInput" />
+  <!-- <text class="emoji-btn">🙂</text> -->
+  <div class="send-btn" @click="onSend">
+    <text class="send-icon">➤</text>
+  </div>
+</div>
+
+  </div>
+</template>
+
+<script>
+
+// import { execSQL } from '../../js/db.js'
+
+export default {
+  data() {
+  const now = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+  return {
+    greetingTime1:now,
+    messages: [],
+    currentCity: '上海',
+    cityData: null,
+    inputText: '' ,   // ← 新增这一行
+    tripData: {
+      startPlace: '杭州东站',
+      endPlace: '上海虹桥站',
+      startTime: '10:00',
+      endTime: '11:02',
+      remainTime: 32,
+      arriveTime: '11:02',
+      progress: 60
+    }
+  }
+},
+
+// 处理输入框变化
+onInput(e) {
+  this.inputText = e.value
+},
+
+// 点击发送按钮
+onSend() {
+  const text = this.inputText.trim()
+  if (!text) return
+  this.sendMessage(text)
+  this.inputText = ''   // 清空输入框
+},
+  // ✅ 改用 onReady，更稳定
+  async onReady() {
+    await this.loadHistory()
+    await this.loadCityData()
+    console.log('✅ 页面初始化完成')
+  },
+
+  // 加载历史消息
+  async loadHistory() {
+    try {
+      const sql = `SELECT * FROM chat_history ORDER BY timestamp ASC LIMIT 50`
+      const result = await execSQL(sql)
+      if (result.rows) {
+        this.messages = result.rows.map(row => ({
+          role: row.role,
+          content: row.content,
+          time: row.timestamp
+        }))
+      }
+      console.log('✅ 加载历史消息成功，共', this.messages.length, '条')
+    } catch (err) {
+      console.error('❌ 加载历史失败', err)
+    }
+  },
+
+  // 加载城市数据
+  async loadCityData() {
+    try {
+      // const sql = `SELECT * FROM city_data WHERE city_name = ?`
+      const result = await execSQL(sql, [this.currentCity])
+      if (result.rows && result.rows.length > 0) {
+        const data = result.rows[0]
+        this.cityData = {
+          attractions: JSON.parse(data.attractions),
+          tips: JSON.parse(data.tips),
+          food: JSON.parse(data.food)
+        }
+        console.log('✅ 加载城市数据成功', this.cityData)
+      }
+    } catch (err) {
+      console.error('❌ 加载城市数据失败', err)
+    }
+  },
+
+  // 保存消息
+  async saveMessage(role, content) {
+    // try {
+    //   const sql = `
+    //     INSERT INTO chat_history (role, content, timestamp, synced)
+    //     VALUES (?, ?, ?, 0)
+    //   `
+    //   await execSQL(sql, [role, content, new Date().toISOString()])
+    // } catch (err) {
+    //   console.error('❌ 保存消息失败', err)
+    // }
+  },
+
+  // 发送消息
+async sendMessage(input) {
+  if (!input) return
+
+  // ✅ 用户消息：使用当前时间
+  const now = new Date()
+  const timeStr = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+  
+  this.messages.push({ 
+    role: 'user', 
+    content: input, 
+    time: timeStr 
+  })
+
+  // 调用 AI...
+  const reply = await this.callAI(input)
+  
+  // ✅ AI回复：也使用当前时间（或者用同一个 now）
+  this.messages.push({ 
+    role: 'assistant', 
+    content: reply, 
+    time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+  })
+},
+
+  // 离线回答
+  getOfflineReply(input) {
+    let reply = '🕊️ 团团离线提示：'
+    if (input.includes('景点') || input.includes('玩')) {
+      reply += `\n推荐景点：${this.cityData?.attractions?.join('、') || '外滩、豫园'}`
+    } else if (input.includes('吃') || input.includes('美食')) {
+      reply += `\n推荐美食：${this.cityData?.food?.join('、') || '小笼包、生煎'}`
+    } else {
+      reply += `\n当前在${this.currentCity}，有需要随时问我~`
+    }
+    this.messages.push({ role: 'assistant', content: reply, time: new Date().toLocaleString() })
+    this.saveMessage('assistant', reply)
+  },
+
+  // 调用后端AI
+  async callAI(input) {
+    try {
+      const res = await fetch('http://localhost:3000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ msg: input })
+      })
+      const data = await res.json()
+      return data.reply || '团团暂时走神了，再问一次吧~'
+    } catch (err) {
+      console.error('调用AI失败', err)
+      throw err
+    }
+  }
+}
+</script>
+
+
+<style>
+  .page {
+    flex-direction: column;
+    background-color: #f0f4ff;
+    height: 100%;
+  }
+
+  /* ===== 导航栏 ===== */
+  .nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 14px;
+    padding-left: 18px;
+    padding-right: 18px;
+    /* background-color: #ffffff; */
+  }
+
+  .brand {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .brand-star {
+    font-size: 16px;
+    color: #4e7cff;
+    margin-right: 5px;
+    font-weight: 700;
+  }
+
+  .brand-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: #4e7cff;
+    margin-right: 8px;
+  }
+
+  .brand-tag {
+    background-color: #eef2ff;
+    border-radius: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .brand-tag-text {
+    font-size: 11px;
+    color: #4e7cff;
+    font-weight: 500;
+  }
+
+  .nav-icons {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav-icon-clock {
+    font-size: 20px;
+    color: #8fa3c8;
+    margin-right: 16px;
+  }
+
+  .nav-icon-menu {
+    font-size: 22px;
+    color: #8fa3c8;
+    font-weight: 700;
+  }
+
+  /* ===== 滚动区 ===== */
+  .scroll-area {
+    flex: 1;
+  }
+
+  .scroll-inner {
+    flex-direction: column;
+    padding-top: 16px;
+    padding-right: 14px;
+    padding-bottom: 16px;
+    padding-left: 14px;
+  }
+
+  /* ===== 气泡行 ===== */
+  .msg-row {
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 12px;
+ }
+
+.msg-left {
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+.msg-right {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+}
+.bubble-user {
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin-bottom: 4px;
+}
+.bubble-user .bubble-text {
+  color: #2d3a5e;
+}
+  .avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 23px;
+    background-color: #eef2ff;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+
+  .avatar-img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .bubble-wrap {
+    flex-direction: column;
+  }
+
+  .bubble {
+    background-color: #ffffff;
+    /* border-radius: 16px 16px 16px 16px; */
+    padding-top: 14px;
+    padding-right: 16px;
+    padding-bottom: 14px;
+    padding-left: 16px;
+    margin-bottom: 4px;
+  }
+
+  .bubble-offline {
+    background-color: #f5f8ff;
+  }
+
+  .bubble-text {
+    font-size: 14px;
+    color: #2d3a5e;
+    line-height: 24px;
+  }
+
+  .bubble-time {
+    font-size: 11px;
+    color: #8fa3c8;
+    padding-left: 2px;
+  }
+
+  .deco-bird {
+    width: 62px;
+    height: 62px;
+    border-radius: 31px;
+    background-color: #dce9ff;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-left: 10px;
+    align-self: flex-end;
+  }
+
+  .deco-img {
+    width: 62px;
+    height: 62px;
+  }
+
+  /* ===== 卡片包装 ===== */
+  .card-wrap {
+    margin-bottom: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .bottom-space {
+    height: 8px;
+  }
+
+  /* ===== 快捷栏 ===== */
+  .quick-bar {
+    flex-direction: row;
+    align-items: stretch;
+    padding-top: 0px;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .quick-item {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.28);
+    border-radius: 18px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgba(255, 250, 255, 0.5);
+    margin-right: 8px;
+  }
+
+  .quick-icon-wrap {
+    width: 15px;
+    height: 15px;
+    border-radius: 12px;
+    background-color: #eef2ff;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+
+  .quick-icon-wrap{
+    background-color: #fff0f0;
+  }
+
+  .quick-icon-text {
+    font-size: 19px;
+  }
+
+  .quick-label {
+    font-size: 11px;
+    color: #2d3a5e;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .quick-sub {
+    font-size: 10px;
+    color: #8fa3c8;
+    text-align: center;
+  }
+
+  .quick-more {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.28);
+    border-radius: 18px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(100, 150, 255, 0.22);
+    width: 50px;
+  }
+
+  .more-dots {
+    font-size: 18px;
+    color: #8fa3c8;
+    margin-bottom: 6px;
+  }
+
+  .more-label {
+    font-size: 10px;
+    color: #8fa3c8;
+    text-align: center;
+  }
+
+  /* ===== 输入栏 ===== */
+  .input-bar {
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0px;
+    padding-bottom: 24px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+.input-field {
+  flex: 1;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.28);
+  border-radius: 24px;
+  padding-left: 18px;
+  padding-right: 16px;
+  margin-right: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(100, 216, 255, 0.22);
+  font-size: 14px;
+  color: #2d3a5e;
+}
+
+  .input-placeholder {
+    font-size: 14px;
+    color: #b0bcd4;
+  }
+
+  .emoji-btn {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+
+  .send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #4e7cff;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .send-icon {
+    font-size: 16px;
+    color: #ffffff;
+  }
+</style>
